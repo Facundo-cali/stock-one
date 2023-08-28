@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'stockone'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9A2366C5F1AF43FB91CAC7DD16409311 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D6A902ADA23E49AF9816AAA8154998C9 }}
           package: .
