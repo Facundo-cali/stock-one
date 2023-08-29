@@ -1,35 +1,26 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    name: {
+    username: {
         type: String,
-        required: [true, "Please enter your name"],
-        min: 3,
-        max: 30
+        required: true,
+        unique: true,
     },
     email: {
         type: String,
-        required: [true, "Please enter your email"],
+        required: true,
         unique: true,
-        trim: true,
-        match: [/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "Please enter a valid email address"]
     },
     password: {
         type: String,
-        required: [true, "Please enter your password"],
-        minLength: [6, "Password must be at least 6 characters long"],
-        maxLength: [30, "Password must be at most 30 characters long"]
+        required: true,
     },
-    phone: {
-        type: String,
-        required: [true, "Please enter your phone number"],
-        maxLength: [15, "Phone number must be 10 digits long"]
-    }
-}, {
-    timestamps: true
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
-//asi es como se va a exportar y como lo vamos a poder usar en las rutas y demas.
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
