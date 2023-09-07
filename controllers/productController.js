@@ -12,6 +12,14 @@ const addProduct = async (req, res) => {
     //faltaria realmente rutearlo con mongodb pero para checkear que funciona esta bien hago esto
 }
 
+//Obtener todos los productos
+const getProducts = async (req, res) => {
+    Product.find()
+        .then((products) => res.json(products))
+        .catch((err) => res.status(400).json('Error: ' + err));
+}
+
 module.exports = {
-    addProduct
+    addProduct,
+    getProducts
 }
