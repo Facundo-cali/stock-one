@@ -14,7 +14,7 @@ const addProduct = async (req, res) => {
 
 //Obtener todos los productos
 const getProducts = async (req, res) => {
-    Product.find()
+    Product.find().sort({ _id: -1 })
         .then((products) => res.json(products))
         .catch((err) => res.status(400).json('Error: ' + err));
 }
