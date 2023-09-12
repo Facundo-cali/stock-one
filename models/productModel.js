@@ -21,6 +21,10 @@ const productSchema = mongoose.Schema({
     description: {
         type: String,
     },
+    deleted: {
+        type: Boolean,
+        default: false,
+    },
 }, {
     timestamps: true, // Agregar timestamps automáticos
 });

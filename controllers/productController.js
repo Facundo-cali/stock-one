@@ -6,7 +6,7 @@ const addProduct = async (req, res) => {
 
     newProduct
         .save()
-        .then(() => res.json('Producto creado'))
+        .then((product) => res.json(product))
         .catch((err) => res.status(400).json('Error: ' + err));
 
     //faltaria realmente rutearlo con mongodb pero para checkear que funciona esta bien hago esto
@@ -14,12 +14,32 @@ const addProduct = async (req, res) => {
 
 //Obtener todos los productos
 const getProducts = async (req, res) => {
-    Product.find().sort({ _id: -1 })
+    Product.find({ deleted: false }).sort({ _id: -1 })
         .then((products) => res.json(products))
         .catch((err) => res.status(400).json('Error: ' + err));
 }
 
+const deleteProduct = async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+
+        if (!product) {
+            return res.status(404).json('Producto no encontrado');
+        }
+
+        // Marcar el producto como eliminado en lugar de eliminarlo
+        product.deleted = true;
+        await product.save();
+
+        res.json('Producto marcado como eliminado');
+    } catch (err) {
+        res.status(400).json('Error: ' + err);
+    }
+}
+
+
 module.exports = {
     addProduct,
-    getProducts
+    getProducts,
+    deleteProduct
 }
