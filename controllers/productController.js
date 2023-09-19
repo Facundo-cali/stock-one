@@ -37,9 +37,32 @@ const deleteProduct = async (req, res) => {
     }
 }
 
+const updateProduct = async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id);
+
+        if (!product) {
+            return res.status(404).json('Producto no encontrado');
+        }
+
+        // Actualizar el producto
+        product.name = req.body.name;
+        product.code = req.body.code;
+        product.quantity = req.body.quantity;
+        product.price = req.body.price;
+        product.description = req.body.description;
+
+        await product.save();
+
+        res.json(Product);
+    } catch (err) {
+        res.status(400).json('Error: ' + err);
+    }
+}
 
 module.exports = {
     addProduct,
     getProducts,
-    deleteProduct
+    deleteProduct,
+    updateProduct
 }
