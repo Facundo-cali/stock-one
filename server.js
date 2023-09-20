@@ -3,8 +3,9 @@ const express = require('express');
 const dbConnection = require('./db');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const userRoute = require('./routes/userRoute.js');
 const productRoute = require('./routes/productRoute.js');
+const userRoute = require('./routes/userRoute.js'); // Agrega esta línea para importar la ruta de usuario
+
 
 const app = express();
 
